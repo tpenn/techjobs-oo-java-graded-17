@@ -53,7 +53,7 @@ public class JobTest {
                 new PositionType("Quality control"),
                 new CoreCompetency("Persistence"));
 
-        assertFalse(job1.equals(job2));
+        assertNotEquals(job1, job2);
     }
 
     // Task 5
@@ -67,12 +67,9 @@ public class JobTest {
                 new CoreCompetency("Persistence"));
         String jobString = testJob.toString();
         String lineSeparator = System.lineSeparator();
-        int lineSeparatorLength = lineSeparator.length();
-        int jobStringLength = jobString.length();
 
-        assertTrue(jobStringLength >= lineSeparatorLength * 2);
-        assertEquals(lineSeparator, jobString.substring(0, lineSeparatorLength));
-        assertEquals(lineSeparator, jobString.substring(jobStringLength - lineSeparatorLength));
+        assertTrue(jobString.startsWith(lineSeparator));
+        assertTrue(jobString.endsWith(lineSeparator));
     }
 
     @Test
@@ -118,7 +115,6 @@ public class JobTest {
     @Test
     public void testToStringHandlesNonExistentJob() {
         Job testJob = new Job();
-        String LS = System.lineSeparator();
 
         assertEquals("OOPS! This job does not seem to exist.", testJob.toString());
     }

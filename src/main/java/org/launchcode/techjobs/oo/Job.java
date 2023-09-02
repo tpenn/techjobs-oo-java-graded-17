@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Job {
 
-    private int id;
+    private final int id;
     private static int nextId = 1;
 
     private String name;
@@ -47,17 +47,22 @@ public class Job {
     @Override
     public String toString() {
         String LS = System.lineSeparator();
+        boolean nameEmpty = name == null || name.isBlank();
+        boolean employerEmpty = employer == null || employer.toString().isBlank();
+        boolean locationEmpty = location == null || location.toString().isBlank();
+        boolean positionEmpty = positionType == null || positionType.toString().isBlank();
+        boolean ccEmpty = coreCompetency == null || coreCompetency.toString().isBlank();
 
-        if (name == null && employer == null && location == null && positionType == null && coreCompetency == null) {
+        if (nameEmpty && employerEmpty && locationEmpty && positionEmpty && ccEmpty) {
             return "OOPS! This job does not seem to exist.";
         }
 
         return LS + "ID: " + id + LS +
-                "Name: " + (name != null && !name.equals("") ? name : "Data not available") + LS +
-                "Employer: " + (employer != null && !employer.toString().equals("") ? employer : "Data not available") + LS +
-                "Location: " + (location != null && !location.toString().equals("") ? location : "Data not available") + LS +
-                "Position Type: " + (positionType != null && !positionType.toString().equals("") ? positionType : "Data not available") + LS +
-                "Core Competency: " + (coreCompetency != null && !coreCompetency.toString().equals("") ? coreCompetency : "Data not available") + LS;
+                "Name: " + (nameEmpty ? "Data not available" : name) + LS +
+                "Employer: " + (employerEmpty ? "Data not available" : employer) + LS +
+                "Location: " + (locationEmpty ? "Data not available" : location) + LS +
+                "Position Type: " + (positionEmpty ? "Data not available" : positionType) + LS +
+                "Core Competency: " + (ccEmpty ? "Data not available" : coreCompetency) + LS;
     }
 // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
